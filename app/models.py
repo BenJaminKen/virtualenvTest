@@ -6,7 +6,7 @@ class HeadTeacher(db.Model):
     age=db.Column(db.INTEGER,default=24)
     name=db.Column(db.String(32))
 
-class Student(db.Model):
+class Student(db.Model):    
     __tablename__='students'
     id=db.Column(db.INTEGER,primary_key=True)
     age=db.Column(db.INTEGER,default=24)
