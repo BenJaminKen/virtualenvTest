@@ -1,0 +1,5 @@
+<h2>Dear {{name}}:</h2><br>
+您好，感谢您在本杰明社区注册，点击以下链接完成用户验证:<br>
+<a href="{{url_for('auth.confirm',token=token,_external=True)}}">点击这里完成验证</a>
+<h2>注意：此链接1分钟之内有效</h2><br>
+<h2>本杰明开发</h2>

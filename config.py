@@ -5,11 +5,11 @@ class Config:
     SECRET_KEY='BENJAMINDEMO'
 
     #邮件需要
-    MAIL_SERVER='smtp.163.com'
-    MAIL_PORT='25'
+    MAIL_SERVER='smtp.qq.com'
+    MAIL_PORT='587'
     MAIL_USE_TLS=True
-    MAIL_USERNAME='liuzhiyou_python@163.com'
-    MAIL_PASSWORD='uplooking123'
+    MAIL_USERNAME='804356962@qq.com'
+    MAIL_PASSWORD='zpdrhojruxtdbcgh'
 
     #数据库需要
     SQLALCHEMY_TRACK_MODIFICATIONS=False

@@ -1,0 +1,5 @@
+{% extends 'base.html' %}
+{% block page_content %}
+<h2>dear {{ current_user.name}}</h2>
+<h2>您已成功注册，快去登录邮箱{{current_user.email}}激活账号吧</h2>
+{% endblock %}

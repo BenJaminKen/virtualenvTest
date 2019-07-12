@@ -1,11 +1,10 @@
 from  app import db
 from  werkzeug.security import generate_password_hash,check_password_hash
 from  flask_login import  UserMixin
-from  app import  login_manager
+from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
+from  flask import current_app
 
-@login_manager.user_loader
-def user_loader(id):
-    return User.query.get(int(id))
+
 
 class User(db.Model,UserMixin):
     __tablename__='users'
@@ -13,6 +12,32 @@ class User(db.Model,UserMixin):
     name=db.Column(db.String(32))
     email=db.Column(db.String(64))
     password_hash=db.Column(db.String(128))
+    # 代表用户是否激活
+    confirmed=db.Column(db.Boolean,default=False)
+
+    # 生成token,发送邮件验证使用
+    def generate_token(self):
+        s = Serializer(current_app.config['SECRET_KEY'],expires_in=60)
+        token = s.dumps({"id":self.id})
+        return token
+
+    def check_token(self,token):
+        s = Serializer(current_app.config['SECRET_KEY'])
+        try:
+            data=s.loads(token)
+        except:
+            return False
+        id=data.get('id')
+        if id is None:
+            return False
+        if id!=self.id:
+            return False
+
+        self.confirmed = True;
+        # db.session.add(self)
+        db.session.commit()
+        return True
+
 
     @property
     def password(self):
